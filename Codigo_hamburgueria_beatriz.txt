@@ -1,0 +1,60 @@
+# =========================================
+# HAMBURGUERIA EM PYTHON
+# Sistema simples para apresentação
+# =========================================
+
+# Cadastro do cliente
+print("==== BEM-VINDO À HAMBURGUERIA ====\n")
+
+nome = input("Digite seu nome: ")
+endereco = input("Digite seu endereço: ")
+
+# Cardápio
+cardapio = {
+    1: ("X-Burguer", 15),
+    2: ("X-Salada", 18),
+    3: ("X-Bacon", 22),
+    4: ("Batata Frita", 10),
+    5: ("Refrigerante", 7)
+}
+
+carrinho = []
+total = 0
+
+# Mostrar cardápio
+print("\n======= CARDÁPIO =======")
+
+for codigo, item in cardapio.items():
+    print(f"{codigo} - {item[0]} | R${item[1]}")
+
+# Escolha dos produtos
+while True:
+    escolha = int(input("\nDigite o número do produto: "))
+
+    if escolha in cardapio:
+        produto = cardapio[escolha][0]
+        preco = cardapio[escolha][1]
+
+        carrinho.append(produto)
+        total += preco
+
+        print(f"{produto} adicionado ao carrinho!")
+
+    continuar = input("Deseja pedir mais algo? (s/n): ")
+
+    if continuar.lower() != "s":
+        break
+
+# Resumo do pedido
+print("\n======= RESUMO DO PEDIDO =======")
+print(f"Cliente: {nome}")
+print(f"Endereço de entrega: {endereco}")
+
+print("\nItens do pedido:")
+for item in carrinho:
+    print("-", item)
+
+print(f"\nTotal da compra: R${total}")
+
+print("\nPedido enviado para entrega!")
+print("Obrigado pela preferência!")
