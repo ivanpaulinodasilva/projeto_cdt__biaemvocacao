@@ -1,3 +1,8 @@
+'''
+🍔 HAMBURGUERIA ROSANA - BACKEND EM PYTHON
+
+'''
+
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import random
@@ -39,7 +44,8 @@ def api_menu():
             'name': 'Hambúrguer Duplo',
             'description': 'Pão, 2 carnes, 2 queijos, bacon',
             'price': 35.00,
-            'image': 'https://images.unsplash.com/photo-1550547990-5343095b6dd5?w=400&h=300&fit=crop'
+            'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop'
+            # 'image': 'https://images.unsplash.com/photo-1550547990-5343095b6dd5?w=400&h=300&fit=crop'
         },
         {
             'id': 3,

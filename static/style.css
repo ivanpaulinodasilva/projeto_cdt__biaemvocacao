@@ -54,6 +54,12 @@ body {
     gap: 10px;
 }
 
+.logo-link {
+    text-decoration: none;
+    color: inherit; 
+    cursor: pointer;
+}
+
 /* HERO SECTION */
 .hero {
     background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);

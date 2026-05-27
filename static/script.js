@@ -1,6 +1,7 @@
+// 🛒 Estado global da aplicação (Apenas uma declaração)
 let cart = [];
 
-// Carregar menu quando a página carrega
+// 🚀 Carregar menu e carrinho quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
     loadMenu();
     updateCart();
@@ -15,20 +16,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Carregar menu da API
+/**
+ * 1. CARREGAR O CARDÁPIO COMPLETO DA API (Visual Original Restaurado)
+ */
 function loadMenu() {
+    // Voltando para o teu ID original do HTML: 'menu-items'
     const menuContainer = document.getElementById('menu-items');
     if (!menuContainer) return;
 
     fetch('/api/menu')
         .then(response => response.json())
         .then(data => {
+            // 🔥 SEGURANÇA: Limpa o container para matar o loop infinito
             menuContainer.innerHTML = '';
+            
             data.forEach(item => {
                 const menuItem = document.createElement('div');
-                menuItem.className = 'menu-item';
+                menuItem.className = 'menu-item'; // Tua classe original de estilo
                 menuItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="menu-item-image" onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(item.name)}'">
+                    <img src="${item.image}" alt="${item.name}" class="menu-item-image" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400'">
                     <div class="menu-item-content">
                         <div class="menu-item-name">${item.name}</div>
                         <div class="menu-item-description">${item.description}</div>
@@ -47,7 +53,9 @@ function loadMenu() {
         });
 }
 
-// Adicionar ao carrinho
+/**
+ * 2. ADICIONAR AO CARRINHO (Sintaxe idêntica à original)
+ */
 function addToCart(itemId, itemName, itemPrice) {
     const cartItem = cart.find(i => i.id === itemId);
 
@@ -65,13 +73,17 @@ function addToCart(itemId, itemName, itemPrice) {
     updateCart();
 }
 
-// Remover do carrinho
+/**
+ * 3. REMOVER DO CARRINHO
+ */
 function removeFromCart(itemId) {
     cart = cart.filter(i => i.id !== itemId);
     updateCart();
 }
 
-// Atualizar carrinho
+/**
+ * 4. ATUALIZAR CARRINHO
+ */
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartItemsList = document.getElementById('cart-items-list');
@@ -80,34 +92,38 @@ function updateCart() {
 
     if (!cartCount) return;
 
-    // Contar itens
+    // Contar itens acumulados
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
 
-    // Renderizar itens
+    // Renderizar itens dentro do carrinho
     if (cart.length === 0) {
-        cartItemsList.innerHTML = '<p class="empty-message">Seu carrinho está vazio</p>';
+        if (cartItemsList) cartItemsList.innerHTML = '<p class="empty-message">Seu carrinho está vazio</p>';
         if (checkoutBtn) checkoutBtn.style.display = 'none';
     } else {
-        cartItemsList.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-qty">Quantidade: ${item.quantity}</div>
+        if (cartItemsList) {
+            cartItemsList.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-qty">Quantidade: ${item.quantity}</div>
+                    </div>
+                    <div class="cart-item-price">R$ ${(item.price * item.quantity).toFixed(2)}</div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
                 </div>
-                <div class="cart-item-price">R$ ${(item.price * item.quantity).toFixed(2)}</div>
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
-            </div>
-        `).join('');
+            `).join('');
+        }
         if (checkoutBtn) checkoutBtn.style.display = 'block';
     }
 
-    // Calcular total
+    // Calcular total em dinheiro
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     if (totalAmount) totalAmount.textContent = total.toFixed(2);
 }
 
-// Alternar carrinho
+/**
+ * 5. ALTERNAR MODAL DO CARRINHO
+ */
 function toggleCart() {
     const modal = document.getElementById('cart-modal');
     if (modal) {
@@ -115,7 +131,9 @@ function toggleCart() {
     }
 }
 
-// Finalizar pedido
+/**
+ * 6. FINALIZAR PEDIDO (CHECKOUT)
+ */
 function checkout() {
     if (cart.length === 0) {
         alert('Seu carrinho está vazio!');

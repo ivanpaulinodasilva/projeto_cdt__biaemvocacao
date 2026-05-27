@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página não encontrada - Hamburgueria Rosana</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
 </head>
 <body>
     <!-- HEADER -->
-    <header class="header">
-        <div class="header-content">
+<header class="header">
+    <div class="header-content">
+        <a href="{{ url_for('index') }}" class="logo-link">
             <div class="logo">🍔 Hamburgueria Rosana</div>
-        </div>
-    </header>
+        </a>
+    </div>
+</header>
 
     <!-- ERROR SECTION -->
     <section class="error-section">
@@ -28,7 +30,7 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p>&copy; 2024 Hamburgueria Rosana. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Hamburgueria Rosana. Todos os direitos reservados.</p>
         <p>Feito com ❤️ para os amantes de hambúrgueres</p>
     </footer>
 </body>
