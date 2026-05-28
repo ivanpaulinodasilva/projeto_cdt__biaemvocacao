@@ -1,11 +1,20 @@
-// 🛒 Estado global da aplicação (Apenas uma declaração)
+// 🛒 Estado global da aplicação
 let cart = [];
 
-// 🚀 Carregar menu e carrinho quando a página carrega
+// 🚀 Inicialização do sistema consoante a página atual
 document.addEventListener('DOMContentLoaded', function() {
-    loadMenu();
-    updateCart();
+    // Inicializa funções da página do cardápio se os elementos existirem
+    if (document.getElementById('menu-items')) {
+        loadMenu();
+        updateCart();
+    }
 
+    // Inicializa funções da página admin se a tabela existir
+    if (document.getElementById('admin-orders-list')) {
+        loadAdminOrders();
+    }
+
+    // Configura o fecho do modal do carrinho ao clicar fora dele
     const modal = document.getElementById('cart-modal');
     if (modal) {
         modal.addEventListener('click', function(event) {
@@ -17,22 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * 1. CARREGAR O CARDÁPIO COMPLETO DA API (Visual Original Restaurado)
+ * 1. CARREGAR O CARDÁPIO COMPLETO DA API (Página do Cliente)
  */
 function loadMenu() {
-    // Voltando para o teu ID original do HTML: 'menu-items'
     const menuContainer = document.getElementById('menu-items');
     if (!menuContainer) return;
 
     fetch('/api/menu')
         .then(response => response.json())
         .then(data => {
-            // 🔥 SEGURANÇA: Limpa o container para matar o loop infinito
+            // Limpa o container para evitar duplicações ou loops
             menuContainer.innerHTML = '';
             
             data.forEach(item => {
                 const menuItem = document.createElement('div');
-                menuItem.className = 'menu-item'; // Tua classe original de estilo
+                menuItem.className = 'menu-item';
                 menuItem.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="menu-item-image" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400'">
                     <div class="menu-item-content">
@@ -54,7 +62,7 @@ function loadMenu() {
 }
 
 /**
- * 2. ADICIONAR AO CARRINHO (Sintaxe idêntica à original)
+ * 2. ADICIONAR AO CARRINHO
  */
 function addToCart(itemId, itemName, itemPrice) {
     const cartItem = cart.find(i => i.id === itemId);
@@ -82,7 +90,7 @@ function removeFromCart(itemId) {
 }
 
 /**
- * 4. ATUALIZAR CARRINHO
+ * 4. ATUALIZAR INTERFACE DO CARRINHO
  */
 function updateCart() {
     const cartCount = document.getElementById('cart-count');
@@ -92,11 +100,11 @@ function updateCart() {
 
     if (!cartCount) return;
 
-    // Contar itens acumulados
+    // Atualiza a bolha de contagem do carrinho flutuante
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
 
-    // Renderizar itens dentro do carrinho
+    // Renderiza a lista de itens dentro do modal
     if (cart.length === 0) {
         if (cartItemsList) cartItemsList.innerHTML = '<p class="empty-message">Seu carrinho está vazio</p>';
         if (checkoutBtn) checkoutBtn.style.display = 'none';
@@ -116,7 +124,7 @@ function updateCart() {
         if (checkoutBtn) checkoutBtn.style.display = 'block';
     }
 
-    // Calcular total em dinheiro
+    // Calcula o valor total em dinheiro
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     if (totalAmount) totalAmount.textContent = total.toFixed(2);
 }
@@ -168,4 +176,78 @@ function checkout() {
         console.error('Erro:', error);
         alert('Erro ao conectar com o servidor.');
     });
+}
+
+/**
+ * 7. CARREGAR PEDIDOS NA TELA DE ADMINISTRAÇÃO
+ */
+function loadAdminOrders() {
+    const ordersContainer = document.getElementById('admin-orders-list');
+    if (!ordersContainer) return;
+
+    fetch('/api/orders')
+        .then(response => response.json())
+        .then(orders => {
+            ordersContainer.innerHTML = '';
+
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #999; padding: 40px;">Nenhum pedido recebido até ao momento.</td>
+                    </tr>`;
+                return;
+            }
+
+            // Inverte para exibir os pedidos mais recentes no topo da tabela
+            orders.reverse().forEach(order => {
+                const itemsFormatted = order.items.map(item => `${item.name} (x${item.quantity})`).join('<br>');
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="col-id">${order.order_id}</td>
+                    <td style="color: #718096;">${order.timestamp}</td>
+                    <td style="line-height: 1.5;">${itemsFormatted}</td>
+                    <td class="col-total">R$ ${order.total.toFixed(2)}</td>
+                    <td><span class="badge-status">${order.status}</span></td>
+                `;
+                ordersContainer.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar dados do administrador:', error);
+            ordersContainer.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red; padding: 40px;">Erro ao carregar os dados dos pedidos.</td></tr>`;
+        });
+}
+
+/**
+ * 8. EXPORTAR TODOS OS PEDIDOS EM FORMATO JSON
+ */
+function exportarPedidosJSON() {
+    fetch('/api/orders')
+        .then(response => response.json())
+        .then(orders => {
+            if (orders.length === 0) {
+                alert('⚠️ Não existem pedidos registados para exportar!');
+                return;
+            }
+
+            // Converte a lista para string JSON estruturada
+            const jsonString = JSON.stringify(orders, null, 4);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Link temporário para simular o download automático
+            const downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = `pedidos_rosana_${new Date().toISOString().slice(0,10)}.json`;
+            
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Erro na exportação:', error);
+            alert('Não foi possível exportar os pedidos.');
+        });
 }

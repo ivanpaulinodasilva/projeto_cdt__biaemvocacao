@@ -1,3 +1,6 @@
+/* ==========================================================================
+   📌 ESTILOS GERAIS E GLOBAIS
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +32,9 @@ body {
     padding: 0 20px;
 }
 
-/* HEADER */
+/* ==========================================================================
+   📌 HEADER (CABEÇALHO)
+   ========================================================================== */
 .header {
     background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
     color: var(--white);
@@ -60,7 +65,9 @@ body {
     cursor: pointer;
 }
 
-/* HERO SECTION */
+/* ==========================================================================
+   📌 HOME / HERO SECTION
+   ========================================================================== */
 .hero {
     background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
     color: var(--white);
@@ -108,7 +115,9 @@ body {
     background-color: #f9f9f9;
 }
 
-/* BENEFÍCIOS */
+/* ==========================================================================
+   📌 BENEFÍCIOS (PÁGINA INICIAL)
+   ========================================================================== */
 .benefits {
     background-color: var(--light-beige);
     padding: 80px 20px;
@@ -163,7 +172,9 @@ body {
     line-height: 1.6;
 }
 
-/* MENU SECTION */
+/* ==========================================================================
+   📌 CARDÁPIO (MENU COMPLETO)
+   ========================================================================== */
 .menu {
     padding: 80px 20px;
     background-color: var(--white);
@@ -256,7 +267,9 @@ body {
     transform: scale(1.05);
 }
 
-/* CARRINHO FLUTUANTE */
+/* ==========================================================================
+   📌 CARRINHO FLUTUANTE E MODAL
+   ========================================================================== */
 .cart-floating {
     position: fixed;
     bottom: 30px;
@@ -291,7 +304,6 @@ body {
     display: inline-block;
 }
 
-/* MODAL */
 .modal {
     display: none;
     position: fixed;
@@ -311,12 +323,8 @@ body {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-content {
@@ -332,14 +340,8 @@ body {
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-header {
@@ -366,9 +368,7 @@ body {
     transition: all 0.2s ease;
 }
 
-.modal-close:hover {
-    color: var(--orange);
-}
+.modal-close:hover { color: var(--orange); }
 
 .cart-items-list {
     margin-bottom: 20px;
@@ -391,29 +391,10 @@ body {
     gap: 10px;
 }
 
-.cart-item-info {
-    flex: 1;
-}
-
-.cart-item-name {
-    font-weight: 700;
-    color: var(--dark-text);
-    font-size: 14px;
-}
-
-.cart-item-qty {
-    color: #999;
-    font-size: 12px;
-    margin-top: 4px;
-}
-
-.cart-item-price {
-    font-weight: 700;
-    color: var(--orange);
-    font-size: 14px;
-    min-width: 70px;
-    text-align: right;
-}
+.cart-item-info { flex: 1; }
+.cart-item-name { font-weight: 700; color: var(--dark-text); font-size: 14px; }
+.cart-item-qty { color: #999; font-size: 12px; margin-top: 4px; }
+.cart-item-price { font-weight: 700; color: var(--orange); font-size: 14px; min-width: 70px; text-align: right; }
 
 .cart-item-remove {
     background-color: #ff3333;
@@ -427,28 +408,10 @@ body {
     transition: all 0.2s ease;
 }
 
-.cart-item-remove:hover {
-    background-color: #cc0000;
-}
-
-.cart-summary {
-    padding: 15px;
-    background-color: var(--light-beige);
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.total-line {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    color: var(--dark-text);
-}
-
-.total-price {
-    color: var(--orange);
-    font-size: 18px;
-}
+.cart-item-remove:hover { background-color: #cc0000; }
+.cart-summary { padding: 15px; background-color: var(--light-beige); border-radius: 8px; margin-bottom: 20px; }
+.total-line { display: flex; justify-content: space-between; font-size: 16px; color: var(--dark-text); }
+.total-price { color: var(--orange); font-size: 18px; }
 
 .btn-checkout {
     width: 100%;
@@ -469,7 +432,9 @@ body {
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* ERROR SECTION */
+/* ==========================================================================
+   📌 PÁGINAS DE ERRO (404 / 500)
+   ========================================================================== */
 .error-section {
     padding: 120px 20px;
     text-align: center;
@@ -480,25 +445,9 @@ body {
     background-color: var(--light-beige);
 }
 
-.error-content h1 {
-    font-size: 96px;
-    font-weight: 700;
-    color: var(--orange);
-    margin-bottom: 20px;
-}
-
-.error-content h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--dark-text);
-    margin-bottom: 15px;
-}
-
-.error-content p {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 30px;
-}
+.error-content h1 { font-size: 96px; font-weight: 700; color: var(--orange); margin-bottom: 20px; }
+.error-content h2 { font-size: 32px; font-weight: 700; color: var(--dark-text); margin-bottom: 15px; }
+.error-content p { font-size: 18px; color: #666; margin-bottom: 30px; }
 
 .btn-back {
     display: inline-block;
@@ -511,13 +460,11 @@ body {
     font-size: 16px;
     transition: all 0.3s ease;
 }
+.btn-back:hover { background-color: #ff5722; transform: translateY(-2px); }
 
-.btn-back:hover {
-    background-color: #ff5722;
-    transform: translateY(-2px);
-}
-
-/* FOOTER */
+/* ==========================================================================
+   📌 FOOTER (RODAPÉ)
+   ========================================================================== */
 .footer {
     background-color: var(--dark-brown);
     color: var(--white);
@@ -525,93 +472,151 @@ body {
     padding: 40px 20px;
     margin-top: 80px;
 }
+.footer p { margin: 10px 0; font-size: 14px; }
 
-.footer p {
-    margin: 10px 0;
-    font-size: 14px;
+/* ==========================================================================
+   📌 SESSÃO EXCLUSIVA: PAINEL DE ADMISTRAR PEDIDOS (/ADMIN)
+   ========================================================================== */
+.admin-section {
+    padding: 50px 0;
+    min-height: 75vh;
 }
 
-/* RESPONSIVO */
+.admin-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+.btn-export-json {
+    background-color: #28a745;
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.15);
+}
+
+.btn-export-json:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.25);
+}
+
+.admin-table-container {
+    overflow-x: auto;
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 15px;
+    min-width: 750px;
+}
+
+.admin-table th {
+    background-color: var(--light-beige);
+    color: var(--dark-brown);
+    padding: 18px 20px;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.admin-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #edf2f7;
+    color: #4a5568;
+    vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td { border-bottom: none; }
+.admin-table tbody tr:hover td { background-color: #fafaf9; }
+
+.col-id {
+    font-weight: 700;
+    color: var(--orange);
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.col-total {
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+.badge-status {
+    background-color: #feebc8;
+    color: #c05621;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    border: 1px solid #fbd38d;
+}
+
+/* ==========================================================================
+   📌 MEDIA QUERIES (RESPONSIVIDADE)
+   ========================================================================== */
 @media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 32px;
-    }
-
-    .hero-content p {
-        font-size: 16px;
-    }
-
-    .hero {
-        padding: 80px 20px;
-        min-height: 400px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-    }
-
-    .cart-floating {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 18px;
-        font-size: 16px;
-    }
-
-    .modal-content {
-        width: 95%;
-        max-width: 100%;
-    }
-
-    .benefits h2,
-    .menu h2 {
-        font-size: 26px;
-        margin-bottom: 40px;
-    }
+    .hero-content h1 { font-size: 32px; }
+    .hero-content p { font-size: 16px; }
+    .hero { padding: 80px 20px; min-height: 400px; }
+    .benefits-grid { grid-template-columns: 1fr; gap: 25px; }
+    .menu-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .cart-floating { bottom: 20px; right: 20px; padding: 12px 18px; font-size: 16px; }
+    .modal-content { width: 95%; max-width: 100%; }
+    .benefits h2, .menu h2 { font-size: 26px; margin-bottom: 40px; }
+    .admin-title { font-size: 24px; }
 }
 
 @media (max-width: 480px) {
-    .logo {
-        font-size: 18px;
-    }
+    .logo { font-size: 18px; }
+    .hero-content h1 { font-size: 24px; }
+    .hero-content p { font-size: 14px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .benefits-grid { gap: 15px; }
+    .benefit-item { padding: 25px; }
+    .cart-floating { padding: 10px 15px; font-size: 14px; bottom: 15px; right: 15px; }
+    .error-content h1 { font-size: 64px; }
+    .error-content h2 { font-size: 24px; }
+}
 
-    .hero-content h1 {
-        font-size: 24px;
-    }
+/* ==========================================================================
+   📌 LINK DE ACESSO AO ADMIN NO FOOTER
+   ========================================================================== */
+.admin-link {
+    color: rgba(255, 255, 255, 0.6); /* Cor branca com transparência para ficar discreto */
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
 
-    .hero-content p {
-        font-size: 14px;
-    }
-
-    .menu-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .benefits-grid {
-        gap: 15px;
-    }
-
-    .benefit-item {
-        padding: 25px;
-    }
-
-    .cart-floating {
-        padding: 10px 15px;
-        font-size: 14px;
-        bottom: 15px;
-        right: 15px;
-    }
-
-    .error-content h1 {
-        font-size: 64px;
-    }
-
-    .error-content h2 {
-        font-size: 24px;
-    }
+.admin-link:hover {
+    color: var(--orange); /* Quando passa o rato, brilha com o laranja da hamburgueria */
+    text-decoration: underline;
 }
