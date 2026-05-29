@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Admin - Hamburgueria Rosana</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <link rel="icon" type="image/png" href="https://fonts.gstatic.com/s/e/notoemoji/latest/1f354/512.webp">
 </head>
+
 <body>
     <header class="header">
         <div class="header-content">
             <a href="{{ url_for('index') }}" class="logo-link">
                 <div class="logo">
-                    🍔 Hamburgueria Rosana 
-                    <span style="font-size: 13px; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; margin-left: 10px; font-weight: normal;">Painel Admin</span>
+                    🍔 Hamburgueria Rosana
+                    <span
+                        style="font-size: 13px; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; margin-left: 10px; font-weight: normal;">Painel
+                        Admin</span>
                 </div>
             </a>
         </div>
@@ -39,7 +44,8 @@
                 </thead>
                 <tbody id="admin-orders-list">
                     <tr>
-                        <td colspan="5" style="text-align: center; color: #999; padding: 40px;">Carregando pedidos...</td>
+                        <td colspan="5" style="text-align: center; color: #999; padding: 40px;">Carregando pedidos...
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -53,4 +59,5 @@
 
     <script src="{{ url_for('static', filename='/script.js') }}"></script>
 </body>
+
 </html>
